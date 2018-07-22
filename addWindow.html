@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Add Member List</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-rc.2/css/materialize.min.css">
+</head>
+<body>
+    <div class="container">
+        <form>
+            <div>
+                <label>Enter Member Name</label>
+                <input type="text" id="name" autofocus>
+            </div>
+            <button class="btn waves-effect waves-light" type="submit">Add Member</button>
+        </form>
+    </div>
+    <script>
+        const electron = require('electron');
+        const {ipcRenderer} = electron;
+
+        const form = document.querySelector('form');
+        form.addEventListener('submit', submitForm);
+
+        function submitForm(e){
+            e.preventDefault();
+            const item = document.querySelector('#name').value;
+            ipcRenderer.send('item:add',item);
+            console.log("send the item to backend");
+        }
+    </script>
+</body>
+</html>
